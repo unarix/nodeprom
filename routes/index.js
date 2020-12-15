@@ -18,7 +18,7 @@ router.get('/', function(req, res, next) {
       console.log(JSON.parse(data)[0].nombre);
         // console.log('hola!');
       res.render('index', { 
-        title: 'Todas las promociones: ',
+        title: 'Todas las promociones',
         data: JSON.parse(data)
       });
     });

@@ -7,7 +7,7 @@ block content
     span.text-danger #{data.id}
   script.
     console.log(!{JSON.stringify(data)})
-  form(method='POST', action='/edit/'+ data.id)
+  form(method='POST', action='/delete/'+ data.id)
     #form-group
       label Nombre:
       input.form-control(name='nombre', type='text', value=data.nombre)
@@ -22,4 +22,4 @@ block content
       input.form-control(name='linkurl', type='text', value=data.linkurl)
     br
     .p-3.mb-2.bg-dark.text-white.text-right
-        input.btn.btn-primary(type='submit',value='Guardar')
+        input.btn.btn-danger(type='submit',value='Eliminar')

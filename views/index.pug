@@ -5,27 +5,28 @@ block content
   p Seleccione para editar una promocion o haga click en 'nuevo' para crear una nueva.
   script.
     console.log(!{JSON.stringify(data).replace(/<\//g, "<\\/")})
-  table.table
-    tr
-      th Código
-      th Nombre
-      th Descripcion
-      th URL
-      th 
+  br
+  table.table.table-striped.table-hover.table-responsive
+    thead.thead-dark
+      tr
+        th Nombre
+        th Descripcion
+        th URL
+        th 
+        th
     tbody
     each promo in data
       tr
-          td 
-            a(href='/edit/' + promo.id) #{promo.id}
           td #{promo.nombre}
           td #{promo.descripcion}
           td 
             a(href=promo.linkurl) #{promo.linkurl}
           td 
-            a.btn.btn-danger.btn-sm(href='/edit/' + promo.id,role='button')
+            a.btn.btn-info.btn-sm(href='/edit/' + promo.id,role='button')
+              span.glyphicon.glyphicon-search editar
+          td 
+            a.btn.btn-danger.btn-sm(href='/delete/' + promo.id,role='button')
               span.glyphicon.glyphicon-search eliminar
-  br
-  .container-fluid
-    a.btn.btn-primary.float-right(href='/new/',role='button')
+  .p-3.mb-2.bg-dark.text-white.text-right
+    a.btn.btn-success(href='/new/',role='button')
       span.glyphicon.glyphicon-search Nuevo
-  br
