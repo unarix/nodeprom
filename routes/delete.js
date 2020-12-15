@@ -1,9 +1,10 @@
 var express = require('express');
 var router = express.Router();
 var request = require('request');
+let auth = require('../config/auth');
 /* GET home page. */
 
-router.get('/:id', function(req, res){
+router.get('/:id', auth.ensureAuthenticated, function(req, res){
     
     console.log('pase');
 
@@ -30,7 +31,7 @@ router.get('/:id', function(req, res){
 
 
 // Update Submit POST Route
-router.post('/:id', function(req, res){
+router.post('/:id', auth.ensureAuthenticated, function(req, res){
     let data = {};
     data.id = req.params.id;
     data.nombre = req.body.nombre;

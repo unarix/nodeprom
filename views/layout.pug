@@ -14,23 +14,29 @@ html
 						svg.me-2(xmlns='http://www.w3.org/2000/svg' width='20' height='20' fill='none' stroke='currentColor' stroke-linecap='round' stroke-linejoin='round' stroke-width='2' aria-hidden='true' viewbox='0 0 24 24')
 							path(d='M23 19a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h4l2-3h6l2 3h4a2 2 0 0 1 2 2z')
 							circle(cx='12' cy='13' r='4')
-						strong(style='padding-left:5px;') promono
+						strong(style='padding-left:5px;') promomono
 					button.navbar-toggler.collapsed(type='button' data-toggle='collapse' data-target='#navbar' aria-controls='navbar' aria-expanded='false' aria-label='Toggle navigation')
 						span.navbar-toggler-icon
 				#navbar.collapse.navbar-collapse
 					.container
 						.row
 							.col-sm-8.col-md-7.py-4
-								h4.text-white About
+								h4.text-white 
+									if user
+										p Hola #{user.username}!
+									else
+										p Logueate!
 								p.text-muted
-									| Add some information about the album below, the author, or any other background context. Make it a few sentences long so folks can pick up some informative tidbits. Then, link them off to some social networking sites or contact information.
+									| Este sistema se llama promomono, por la union de las palabras PROMO y MONO. En la pagina inicial vas a encontrar un listado con todas las promos vigentes, podes editarlas eliminarlas o crear una nueva. 
 							.col-sm-4.offset-md-1.py-4
 								h4.text-white Menu
 								ul.list-unstyled
-									li
-										a.text-white(href='#') Login
-									li
-										a.text-white(href='#') a2klab
+									if user
+										li
+											a.text-white(href='/login/logout') Logout
+									else
+										li
+											a.text-white(href='/login') Login
 		.container
 			br
 			block content

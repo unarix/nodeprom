@@ -2,9 +2,10 @@ var express = require('express');
 var router = express.Router();
 var request = require('request');
 var uuid = require('uuid');
+let auth = require('../config/auth');
 
 /* GET new page. */
-router.get('/', function(req, res){
+router.get('/', auth.ensureAuthenticated, function(req, res){
     
     res.render('new', { 
         title: 'Nueva promocion: '
@@ -13,7 +14,7 @@ router.get('/', function(req, res){
 
 
 // Update Submit POST Route
-router.post('/', function(req, res){
+router.post('/', auth.ensureAuthenticated, function(req, res){
     let data = {};
     data.id = uuid.v4();
     data.nombre = req.body.nombre;

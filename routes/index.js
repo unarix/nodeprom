@@ -1,8 +1,9 @@
 var express = require('express');
 var router = express.Router();
+let auth = require('../config/auth');
 
 /* GET home page. */
-router.get('/', function(req, res, next) {
+router.get('/', auth.ensureAuthenticated, function(req, res, next) {
   
   let data = '';
 

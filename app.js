@@ -2,14 +2,10 @@ var createError = require('http-errors');
 var express = require('express');
 var path = require('path');
 var cookieParser = require('cookie-parser');
+const expressValidator = require('express-validator');
 var logger = require('morgan');
-
-var indexRouter = require('./routes/index');
-var usersRouter = require('./routes/users');
-var editRouter = require('./routes/edit');
-var newRouter = require('./routes/new');
-var deleteRouter = require('./routes/delete');
-
+const session = require('express-session');
+const passport = require('passport');
 
 var app = express();
 
@@ -27,17 +23,22 @@ app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public'))); // Todos los archivos estaticos van a estar en la carpeta public
 
-app.use('/', indexRouter);
-app.use('/users', usersRouter);
-app.use('/edit', editRouter);
-app.use('/new', newRouter);
-app.use('/delete', deleteRouter);
+// Express Session Middleware
+app.use(session({
+  secret: 'keyboard cat',
+  resave: true,
+  saveUninitialized: true
+}));
 
-
-
-// catch 404 and forward to error handler
-app.use(function(req, res, next) {
-  next(createError(404));
+// Passport Config
+require('./config/passport')(passport);
+// Passport Middleware
+app.use(passport.initialize());
+app.use(passport.session());
+// Cualquiera sea el router cargo el usuario logueado y lo dejo disponible
+app.get('*', function(req, res, next){
+  res.locals.user = req.user || null;
+  next();
 });
 
 // error handler
@@ -50,5 +51,25 @@ app.use(function(err, req, res, next) {
   res.status(err.status || 500);
   res.render('error');
 });
+
+var indexRouter = require('./routes/index');
+var usersRouter = require('./routes/users');
+var editRouter = require('./routes/edit');
+var newRouter = require('./routes/new');
+var deleteRouter = require('./routes/delete');
+var loginRouter = require('./routes/login');
+
+app.use('/', indexRouter);
+app.use('/users', usersRouter);
+app.use('/edit', editRouter);
+app.use('/new', newRouter);
+app.use('/delete', deleteRouter);
+app.use('/login', loginRouter);
+
+// catch 404 and forward to error handler
+app.use(function(req, res, next) {
+  next(createError(404));
+});
+
 
 module.exports = app;
