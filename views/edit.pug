@@ -4,22 +4,23 @@ block content
   h2 #{title} 
   p 
     strong Código de seguridad: 
-    span.text-danger #{data.id}
+    span.text-info #{data.id}
   script.
     console.log(!{JSON.stringify(data)})
   form(method='POST', action='/edit/'+ data.id)
-    #form-group
+    .form-group
       label Nombre:
       input.form-control(name='nombre', type='text', value=data.nombre)
-    #form-group
+    .form-group
       label Descripcion:
       textarea.form-control(name='descripcion')= data.descripcion
-    #form-group
+    .form-group
       label Link imagen:
       input.form-control(name='linkimagen', type='text', value=data.linkimagen)
-    #form-group
+      small Asegúrese de que el link apunte directamente a una imagen
+    .form-group
       label Link url:
       input.form-control(name='linkurl', type='text', value=data.linkurl)
     br
-    .p-3.mb-2.bg-dark.text-white.text-right
+    .p-3.mb-2.rounded.bg-dark.text-white.text-right
         input.btn.btn-primary(type='submit',value='Guardar')

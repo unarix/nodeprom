@@ -1,32 +1,33 @@
 extends layout
 
 block content
-  h2= title
-  p Seleccione para editar una promocion o haga click en 'nuevo' para crear una nueva.
+  .p-3.rounded.bg-light
+    h2= title
+    p Seleccione para editar una promocion o haga click en 'nuevo' para crear una nueva.
   script.
     console.log(!{JSON.stringify(data).replace(/<\//g, "<\\/")})
   br
-  table.table.table-striped.table-hover.table-responsive
-    thead.thead-dark
+  table.table.table-striped.table-hover.table-responsive-md
+    thead.thead-dark.rounded
       tr
         th Nombre
-        th Descripcion
-        th URL
-        th 
+        th.hidden-md-down Descripcion
+        th.hidden-md-down URL
         th
+        th.hidden-md-down
     tbody
     each promo in data
       tr
           td #{promo.nombre}
-          td #{promo.descripcion}
-          td 
+          td.hidden-md-down #{promo.descripcion}
+          td.hidden-md-down
             a(href=promo.linkurl) #{promo.linkurl}
           td 
             a.btn.btn-info.btn-sm(href='/edit/' + promo.id,role='button')
               span.glyphicon.glyphicon-search editar
-          td 
+          td.hidden-md-down
             a.btn.btn-danger.btn-sm(href='/delete/' + promo.id,role='button')
               span.glyphicon.glyphicon-search eliminar
-  .p-3.mb-2.bg-dark.text-white.text-right
+  .p-3.mb-2.rounded.bg-dark.text-white.text-right
     a.btn.btn-success(href='/new/',role='button')
       span.glyphicon.glyphicon-search Nuevo
