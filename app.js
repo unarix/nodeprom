@@ -6,12 +6,18 @@ var logger = require('morgan');
 
 var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users');
+var editRouter = require('./routes/edit');
+var newRouter = require('./routes/new');
 
 var app = express();
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views')); // Establece la carpeta view como la default para las vistas
 app.set('view engine', 'pug'); // configura a pug como el view engine.
+
+app.use('/css', express.static(path.join(__dirname, 'node_modules/bootstrap/dist/css')))
+app.use('/js', express.static(path.join(__dirname, 'node_modules/bootstrap/dist/js')))
+app.use('/js', express.static(path.join(__dirname, 'node_modules/jquery/dist')))
 
 app.use(logger('dev')); // motor de logs
 app.use(express.json());
@@ -21,6 +27,10 @@ app.use(express.static(path.join(__dirname, 'public'))); // Todos los archivos e
 
 app.use('/', indexRouter);
 app.use('/users', usersRouter);
+app.use('/edit', editRouter);
+app.use('/new', newRouter);
+
+
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {

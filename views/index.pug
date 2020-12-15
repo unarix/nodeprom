@@ -1,5 +1,31 @@
 extends layout
 
 block content
-  h1= title
-  p Welcome to #{title}
+  h2= title
+  p Seleccione para editar una promocion o haga click en 'nuevo' para crear una nueva.
+  script.
+    console.log(!{JSON.stringify(data).replace(/<\//g, "<\\/")})
+  table.table
+    tr
+      th Código
+      th Nombre
+      th Descripcion
+      th URL
+      th 
+    tbody
+    each promo in data
+      tr
+          td 
+            a(href='/edit/' + promo.id) #{promo.id}
+          td #{promo.nombre}
+          td #{promo.descripcion}
+          td 
+            a(href=promo.linkurl) #{promo.linkurl}
+          td 
+            a.btn.btn-danger.btn-sm(href='/edit/' + promo.id,role='button')
+              span.glyphicon.glyphicon-search eliminar
+  br
+  .container-fluid
+    a.btn.btn-primary.float-right(href='/new/',role='button')
+      span.glyphicon.glyphicon-search Nuevo
+  br

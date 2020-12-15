@@ -1,0 +1,20 @@
+extends layout
+
+block content
+  h2 #{title} 
+  p Al crear una nueva promocion, quedara disponible en el bot inmediatamente.
+  form(method='POST', action='/new/')
+    #form-group
+      label Nombre:
+      input.form-control(name='nombre', type='text')
+    #form-group
+      label Descripcion:
+      textarea.form-control(name='descripcion')
+    #form-group
+      label Link imagen:
+      input.form-control(name='linkimagen', type='text')
+    #form-group
+      label Link url:
+      input.form-control(name='linkurl', type='text')
+    br
+    input.btn.btn-primary(type='submit',value='Guardar')
