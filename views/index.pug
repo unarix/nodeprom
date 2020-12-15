@@ -20,11 +20,11 @@ block content
         tr
             td #{promo.nombre}
             td.d-none.d-xs-none.d-sm-none.d-md-block.d-lg-block.d-xl-block #{promo.descripcion}
-            td 
-              a.btn.btn-info.btn-sm(href='/edit/' + promo.id,role='button')
+            td.text-right
+              a.btn.btn-info.btn-sm.text-right(href='/edit/' + promo.id,role='button')
                 span.glyphicon.glyphicon-search editar
-            td
-              a.btn.btn-danger.btn-sm(href='/delete/' + promo.id,role='button')
+            td.text-right
+              a.btn.btn-danger.btn-sm.text-right(href='/delete/' + promo.id,role='button')
                 span.glyphicon.glyphicon-search eliminar
   .p-3.mb-2.rounded.bg-dark.text-white.text-right
     a.btn.btn-success(href='/new/',role='button')
