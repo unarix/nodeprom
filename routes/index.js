@@ -16,7 +16,7 @@ router.get('/', auth.ensureAuthenticated, function(req, res, next) {
   
     // The whole response has been received. Print out the result.
     resp.on('end', () => {
-      console.log(JSON.parse(data)[0].nombre);
+      console.log('   --> ' + JSON.parse(data)[0].nombre);
         // console.log('hola!');
       res.render('index', { 
         title: 'Todas las promociones',

@@ -5,10 +5,10 @@ module.exports = function(passport){
     // Local Strategy
     passport.use(new LocalStrategy(
         function(username, password, cb) {
-            users.findByUsername(username, function(err, user) {
+            users.checkUser(username, password, function(err, user) {
                 if (err) { return cb(err); }
                 if (!user) { return cb(null, false); }
-                if (user.password != password) { return cb(null, false); }
+                //if (user.password != password) { return cb(null, false); }
                 return cb(null, user);
             });
     }));
